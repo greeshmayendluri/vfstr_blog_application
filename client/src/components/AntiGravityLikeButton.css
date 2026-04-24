@@ -1,0 +1,75 @@
+.anti-gravity-container {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.like-button-base {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  background-color: white;
+  border: 1px solid #e5e7eb;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 500;
+  color: #374151;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.like-button-base:hover {
+  background-color: #f9fafb;
+}
+
+.like-button-base.liked {
+  color: #ef4444;
+  border-color: #ef4444;
+  background-color: #fef2f2;
+}
+
+/* Hide original content when floating */
+.like-button-base.is-floated > * {
+  opacity: 0;
+}
+
+.floating-particle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  pointer-events: none;
+  opacity: 0;
+  /* Red color like the final state */
+  color: #ef4444;
+  font-weight: 500;
+  z-index: 50;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes antiGravityAscent {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(calc(-50% + var(--random-x)), -150px) scale(0.9) rotate(var(--random-rot));
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--random-x)), -250px) scale(0.9) rotate(calc(var(--random-rot) * 1.5));
+  }
+}
+
+.animate-float {
+  /* Use ease-out for a burst that slows down slightly, or cubic-bezier for a floaty feel */
+  animation: antiGravityAscent 2.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
